@@ -76,7 +76,7 @@ int ishell(int argc, char **argv, char **envp, int *status)
 		return (FAIL);
 	errptr = _cpsasbtoc(argv[0], ERRSTR_0, ':');
 	setcmd_t(&cmdtoexe, NULL, arg_v, envrn);
-	while (1)
+	while (wloop)
 	{
 		wcnt = write(1, "$", 2);
 		if (wcnt < 0)
@@ -151,7 +151,7 @@ int ashell(int argc, char **argv, char **envp, int *status)
 int _readfd(char **argv, char **envp, int *status)
 {
 	char *cmdlines, **argcmd;
-	char *dlmtr = " \n", errptr;
+	char *dlmtr = " \n", *errptr;
 	ssize_t rcnt;
 	size_t apln, len = 0;
 	char **envrn = {NULL};
