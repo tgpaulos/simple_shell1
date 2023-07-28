@@ -34,6 +34,7 @@ int execcmd(struct cmd_t *exeptr, int *status)
 /**
  * readcmd - reads command from std input
  * @arrpln: the length of returned argument array pointer.
+ * @wloop: hold the value to break or continue while loop
  *
  * Return: pointer command read.
  */

@@ -151,23 +151,20 @@ int ashell(int argc, char **argv, char **envp, int *status)
 int _readfd(char **argv, char **envp, int *status)
 {
 	char *cmdlines, **argcmd;
-	char *dlmtr = " \n";
+	char *dlmtr = " \n", errptr;
 	ssize_t rcnt;
 	size_t apln, len = 0;
-	char *errptr;
 	char **envrn = {NULL};
 	char **arg_v = {NULL};
 	struct cmd_t cmdtoexe;
 
 	cmdlines = NULL;
-	argcmd = NULL;
 	if (argv == NULL)
 		return (FAIL);
 	if (argv[0] == NULL)
 		return (FAIL);
 	errptr = _cpsasbtoc(argv[0], ERRSTR_0, ':');
 	setcmd_t(&cmdtoexe, NULL, arg_v, envrn);
-
 	while ((rcnt = getline(&cmdlines, &len, stdin)) > 0)
 	{
 		argcmd = _tostrarr(cmdlines, dlmtr, &apln);
