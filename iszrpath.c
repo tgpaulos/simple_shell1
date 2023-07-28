@@ -37,7 +37,7 @@ int execcmd(struct cmd_t *exeptr, int *status)
  *
  * Return: pointer command read.
  */
-char **readcmd(size_t *arrpln)
+char **readcmd(size_t *arrpln, int *wloop)
 {
 	char buff[1024];
 	char **argcmd;
@@ -55,7 +55,8 @@ char **readcmd(size_t *arrpln)
 	}
 	if ((rcnt == 0 && tcnt > 9) || rcnt < 0)
 	{
-		exit(1);
+		*wloop = 0;
+		return (NULL);
 	}
 	argcmd = _tostrarr(buff, dlmtr_c, arrpln);
 	if (argcmd == NULL)

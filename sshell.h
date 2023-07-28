@@ -56,7 +56,7 @@ int ishell(int argc, char **argv, char **envp, int *status);
 int execcmd(struct cmd_t *exeptr, int *status);
 char *lkdirfcmd(char *path, char *cmd);
 char *lkpath(char *envp[]);
-char **readcmd(size_t *arrpln);
+char **readcmd(size_t *arrpln, int *wloop);
 char *getcmd(char *aptr, char **envp);
 size_t _strcp(char *str_a, char *str_b);
 size_t _strlen(char *str);

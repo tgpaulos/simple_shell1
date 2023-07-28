@@ -62,6 +62,7 @@ int main(int argc, char **argv, char **envp)
 int ishell(int argc, char **argv, char **envp, int *status)
 {
 	ssize_t wcnt;
+	int wloop = 1;
 	size_t arrptrln;
 	char **iaptr, *errptr;
 	char **envrn = {NULL};
@@ -75,17 +76,14 @@ int ishell(int argc, char **argv, char **envp, int *status)
 		return (FAIL);
 	errptr = _cpsasbtoc(argv[0], ERRSTR_0, ':');
 	setcmd_t(&cmdtoexe, NULL, arg_v, envrn);
-	while (1)
+	while (wloop)
 	{
 		wcnt = write(1, "$", 2);
 		if (wcnt < 0)
 			continue;
-		iaptr = readcmd(&arrptrln);
+		iaptr = readcmd(&arrptrln, &wloop);
 		if (iaptr == NULL || iaptr[0] == NULL)
-		{
-			write(STDOUT_FILENO, errptr, _strlen(errptr));
 			continue;
-		}
 		iaptr[0] = getcmd(iaptr[0], envp);
 		if (iaptr[0] == NULL)
 		{
@@ -153,7 +151,7 @@ int ashell(int argc, char **argv, char **envp, int *status)
 int _readfd(char **argv, char **envp, int *status)
 {
 	char *cmdlines, **argcmd;
-	char *dlmtr = "\t\n";
+	char *dlmtr = " \n";
 	ssize_t rcnt;
 	size_t apln, len = 0;
 	char *errptr;
