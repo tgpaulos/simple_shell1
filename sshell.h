@@ -22,7 +22,7 @@
 #define MAX_ARGUMENTS 100
 #define FAIL -1
 #define SUCC 0
-#define ERRSTR_0 "No such file or directory\n"
+#define ERRSTR_0 " No such file or directory\n"
 
 extern char **environ;
 void display_prompt(void);
