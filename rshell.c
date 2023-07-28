@@ -76,7 +76,7 @@ int ishell(int argc, char **argv, char **envp, int *status)
 		return (FAIL);
 	errptr = _cpsasbtoc(argv[0], ERRSTR_0, ':');
 	setcmd_t(&cmdtoexe, NULL, arg_v, envrn);
-	while (wloop)
+	while (1)
 	{
 		wcnt = write(1, "$", 2);
 		if (wcnt < 0)
