@@ -153,7 +153,7 @@ int ashell(int argc, char **argv, char **envp, int *status)
 int _readfd(char **argv, char **envp, int *status)
 {
 	char *cmdlines, **argcmd;
-	char *dlmtr = " \n";
+	char *dlmtr = "\t\n";
 	ssize_t rcnt;
 	size_t apln, len = 0;
 	char *errptr;
@@ -161,6 +161,8 @@ int _readfd(char **argv, char **envp, int *status)
 	char **arg_v = {NULL};
 	struct cmd_t cmdtoexe;
 
+	cmdlines = NULL;
+	argcmd = NULL;
 	if (argv == NULL)
 		return (FAIL);
 	if (argv[0] == NULL)
@@ -188,6 +190,7 @@ int _readfd(char **argv, char **envp, int *status)
 		free(argcmd[0]);
 		free(argcmd);
 		len = 0;
+		cmdlines = NULL;
 	}
 	return (SUCC);
 }
